@@ -1,24 +1,71 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Header from "./ui/Header";
+import { ThemeProvider } from "@material-ui/styles";
+import theme from "./ui/Theme";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { CssBaseline } from "@material-ui/core";
+import Footer from "./ui/Footer";
+import LoginPage from "./pages/LoginPage";
+import HomePage from "./pages/HomePage";
 
 function App() {
+  const [activeTab, setActiveTab] = useState(0);
+  const [option, setOption] = useState(0);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Header
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          option={option}
+          setOption={setOption}
+        />
+        <Switch>
+          <Route
+            exact
+            path="/"
+            component={() => (
+              <HomePage setActiveTab={setActiveTab} setOption={setOption} />
+            )}
+          ></Route>
+          <Route exact path="/login" component={() => <LoginPage />}></Route>
+          <Route
+            exact
+            path="/profile"
+            component={() => <div>Profile</div>}
+          ></Route>
+          <Route
+            exact
+            path="/studies"
+            component={() => <div>Studies</div>}
+          ></Route>
+          <Route exact path="/exams" component={() => <div>Exams</div>}></Route>
+          <Route
+            exact
+            path="/subjects"
+            component={() => <div>Subjects</div>}
+          ></Route>
+          <Route
+            exact
+            path="/finances"
+            component={() => <div>Financials</div>}
+          ></Route>
+          <Route
+            exact
+            path="/support"
+            component={() => <div>Support</div>}
+          ></Route>
+        </Switch>
+        <Footer
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          option={option}
+          setOption={setOption}
+        />
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
