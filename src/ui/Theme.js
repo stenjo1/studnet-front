@@ -70,6 +70,11 @@ export default createMuiTheme({
       fontWeight: 300,
       color: black,
     },
+    label: {
+      fontSize: "1.25rem",
+      fontFamily: "Roboto",
+      fontWeight: 400,
+    },
     loginButton: {
       fontFamily: "Pacifico",
       fontSize: "1rem",

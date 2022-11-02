@@ -7,6 +7,7 @@ import { CssBaseline } from "@material-ui/core";
 import Footer from "./ui/Footer";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   const [activeTab, setActiveTab] = useState(0);
@@ -34,7 +35,7 @@ function App() {
           <Route
             exact
             path="/profile"
-            component={() => <div>Profile</div>}
+            component={() => <ProfilePage />}
           ></Route>
           <Route
             exact

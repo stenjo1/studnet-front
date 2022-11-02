@@ -104,8 +104,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "16em",
     marginLeft: "10em",
     minWidth: "21.5em",
-    [theme.breakpoints.down("xs")]: {
-      marginLeft: 0,
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: "0em",
     },
   },
 }));
