@@ -7,6 +7,8 @@ import {
   Grid,
   makeStyles,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@material-ui/core";
 import Lottie from "react-lottie";
 
@@ -53,6 +55,9 @@ const useStyles = makeStyles((theme) => ({
 
 const StudiesPage = (props) => {
   const classes = useStyles();
+  const theme = useTheme();
+  const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
+  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const { setActiveTab, setOption } = props;
 
   const studiesOptions = {
@@ -102,17 +107,23 @@ const StudiesPage = (props) => {
         <Grid
           container
           justify="flex-start"
+          direction={matchesMD ? "column" : "row"}
           alignItems="center"
-          style={{ marginTop: "8em", marginBottom: "8em" }}
+          style={{ marginTop: matchesMD ? "3em" : "8em", marginBottom: "8em" }}
         >
-          <Grid item className={classes.animation}>
+          <Grid item className={classes.animation} style={matchesSM ? {
+              "-webkit-transform": "rotate(90deg)",
+              "-moz-transform": "rotate(90deg)",
+              "-o-transform": "rotate(90deg)",
+              "-ms-transform": "rotate(90deg)",
+              transform: "rotate(90deg)"} : {}}>
             <Lottie
               options={arrowOptions}
               height={"100%"}
               width={"100%"}
             ></Lottie>
           </Grid>
-          <Grid item>
+          <Grid item style={{marginTop: matchesMD ? "6em" : "undefined"}}>
             <Card sx={{ maxWidth: 300 }}>
               <CardMedia
                 component="img"
@@ -153,17 +164,18 @@ const StudiesPage = (props) => {
       <Grid item>
         <Grid
           container
+          direction={matchesMD ? "column-reverse" : "row"}
           justify="flex-end"
           alignItems="center"
-          style={{ marginTop: "8em", marginBottom: "8em" }}
+          style={{ marginTop: matchesMD ? "1em" : "8em", marginBottom: "8em", marginLeft: "auto", marginRight: "auto" }}
         >
-          <Grid item>
+          <Grid item style={{marginTop: matchesMD ? "6em" : "undefined"}}>
             <Card sx={{ maxWidth: 300 }}>
               <CardMedia
                 component="img"
                 height="300"
                 image={subject}
-                alt="people taking exam"
+                alt="math lecture"
               />
               <CardContent>
                 <Typography gutterBottom variant="h3" component="div">
@@ -197,8 +209,12 @@ const StudiesPage = (props) => {
           <Grid
             item
             className={classes.animation}
-            style={{
-              marginRight: "-5em",
+            style={matchesSM ? {
+              "-webkit-transform": "rotate(90deg)",
+              "-moz-transform": "rotate(90deg)",
+              "-o-transform": "rotate(90deg)",
+              "-ms-transform": "rotate(90deg)",
+              transform: "rotate(90deg)"} : {
               "-webkit-transform": "scaleX(-1)",
               transform: "scaleX(-1)",
             }}
