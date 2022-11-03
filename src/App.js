@@ -8,6 +8,7 @@ import Footer from "./ui/Footer";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
+import StudiesPage from "./pages/StudiesPage";
 
 function App() {
   const [activeTab, setActiveTab] = useState(0);
@@ -40,7 +41,9 @@ function App() {
           <Route
             exact
             path="/studies"
-            component={() => <div>Studies</div>}
+            component={() => (
+              <StudiesPage setActiveTab={setActiveTab} setOption={setOption} />
+            )}
           ></Route>
           <Route exact path="/exams" component={() => <div>Exams</div>}></Route>
           <Route

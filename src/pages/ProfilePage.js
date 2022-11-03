@@ -9,6 +9,7 @@ import {
   FormGroup,
   FormLabel,
   Grid,
+  IconButton,
   makeStyles,
   Paper,
   Radio,
@@ -23,9 +24,11 @@ import {
 import EditIcon from "@material-ui/icons/Edit";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import SaveIcon from "@material-ui/icons/Save";
 
 import profileImage from "../assets/slika.jpg";
 import backgroundImage from "../assets/background.jpg";
+import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   mainPaper: {
@@ -99,6 +102,8 @@ const ProfilePage = () => {
   const theme = useTheme();
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
+
+  const [editMode, setEditMode] = useState(false);
 
   return (
     <Paper elevation={3} className={classes.mainPaper}>
@@ -174,7 +179,13 @@ const ProfilePage = () => {
                           Profile information
                         </Typography>
                       )}
-                      <EditIcon color="secondary" />
+                      <IconButton
+                        aria-label="edit"
+                        style={{ padding: 0 }}
+                        onClick={() => setEditMode(true)}
+                      >
+                        <EditIcon color="secondary" />
+                      </IconButton>
                     </Grid>
                   </Grid>
                   <Grid item>
@@ -190,7 +201,7 @@ const ProfilePage = () => {
                       <TextField
                         id="profile-full-name"
                         hiddenLabel
-                        disabled
+                        disabled={!editMode}
                         variant="outlined"
                         defaultValue="Stefanija Markovic"
                         fullWidth
@@ -210,7 +221,7 @@ const ProfilePage = () => {
                       <TextField
                         id="profile-mobile"
                         hiddenLabel
-                        disabled
+                        disabled={!editMode}
                         variant="outlined"
                         defaultValue="+381 65 9444 954"
                         fullWidth
@@ -230,7 +241,7 @@ const ProfilePage = () => {
                       <TextField
                         id="profile-email"
                         hiddenLabel
-                        disabled
+                        disabled={!editMode}
                         variant="outlined"
                         defaultValue="stefanija.mar1999@gmail.com"
                         fullWidth
@@ -250,7 +261,7 @@ const ProfilePage = () => {
                       <TextField
                         id="profile-address"
                         hiddenLabel
-                        disabled
+                        disabled={!editMode}
                         variant="outlined"
                         defaultValue="Pozeska"
                         fullWidth
@@ -281,7 +292,7 @@ const ProfilePage = () => {
                               <TextField
                                 id="profile-birthday"
                                 hiddenLabel
-                                disabled
+                                disabled={!editMode}
                                 type="date"
                                 variant="outlined"
                                 defaultValue="1999-10-20"
@@ -303,7 +314,7 @@ const ProfilePage = () => {
                               <TextField
                                 id="profile-birthday"
                                 hiddenLabel
-                                disabled
+                                disabled={!editMode}
                                 type="date"
                                 variant="outlined"
                                 defaultValue="2018-07-03"
@@ -347,6 +358,11 @@ const ProfilePage = () => {
                         </Grid>
                       </ExpansionPanelDetails>
                     </ExpansionPanel>
+                  </Grid>
+                  <Grid item>
+                    <Button color="secondary" variant="contained">
+                      <SaveIcon />
+                    </Button>
                   </Grid>
                 </Grid>
               </Grid>
