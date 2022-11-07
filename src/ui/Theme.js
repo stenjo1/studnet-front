@@ -70,6 +70,12 @@ export default createMuiTheme({
       fontWeight: 300,
       color: black,
     },
+    important: {
+      fontSize: "1rem",
+      fontFamily: "Roboto",
+      fontWeight: 500,
+      color: "#ff6961",
+    },
     label: {
       fontSize: "1.25rem",
       fontFamily: "Roboto",

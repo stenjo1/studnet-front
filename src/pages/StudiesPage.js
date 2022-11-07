@@ -19,6 +19,7 @@ import background from "../assets/logos/background_logo_small.png";
 import exam from "../assets/exams.png";
 import subject from "../assets/subject.jpg";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   headingTextContainer: {
@@ -54,10 +55,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const StudiesPage = (props) => {
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   const classes = useStyles();
   const theme = useTheme();
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
+  const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
   const { setActiveTab, setOption } = props;
 
   const studiesOptions = {
@@ -111,20 +121,32 @@ const StudiesPage = (props) => {
           alignItems="center"
           style={{ marginTop: matchesMD ? "3em" : "8em", marginBottom: "8em" }}
         >
-          <Grid item className={classes.animation} style={matchesSM ? {
-              "-webkit-transform": "rotate(90deg)",
-              "-moz-transform": "rotate(90deg)",
-              "-o-transform": "rotate(90deg)",
-              "-ms-transform": "rotate(90deg)",
-              transform: "rotate(90deg)"} : {}}>
+          <Grid
+            item
+            className={classes.animation}
+            style={
+              matchesSM
+                ? {
+                    "-webkit-transform": "rotate(90deg)",
+                    "-moz-transform": "rotate(90deg)",
+                    "-o-transform": "rotate(90deg)",
+                    "-ms-transform": "rotate(90deg)",
+                    transform: "rotate(90deg)",
+                  }
+                : {}
+            }
+          >
             <Lottie
               options={arrowOptions}
               height={"100%"}
               width={"100%"}
             ></Lottie>
           </Grid>
-          <Grid item style={{marginTop: matchesMD ? "6em" : "undefined"}}>
-            <Card sx={{ maxWidth: 300 }}>
+          <Grid item style={{ marginTop: matchesMD ? "6em" : "undefined" }}>
+            <Card
+              sx={{ maxWidth: 300 }}
+              style={{ minWidth: matchesXS ? "auto" : 500 }}
+            >
               <CardMedia
                 component="img"
                 height="300"
@@ -167,10 +189,18 @@ const StudiesPage = (props) => {
           direction={matchesMD ? "column-reverse" : "row"}
           justify="flex-end"
           alignItems="center"
-          style={{ marginTop: matchesMD ? "1em" : "8em", marginBottom: "8em", marginLeft: "auto", marginRight: "auto" }}
+          style={{
+            marginTop: matchesMD ? "1em" : "8em",
+            marginBottom: "8em",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
         >
-          <Grid item style={{marginTop: matchesMD ? "6em" : "undefined"}}>
-            <Card sx={{ maxWidth: 300 }}>
+          <Grid item style={{ marginTop: matchesMD ? "6em" : "undefined" }}>
+            <Card
+              sx={{ maxWidth: 300 }}
+              style={{ minWidth: matchesXS ? "auto" : 500 }}
+            >
               <CardMedia
                 component="img"
                 height="300"
@@ -209,15 +239,20 @@ const StudiesPage = (props) => {
           <Grid
             item
             className={classes.animation}
-            style={matchesSM ? {
-              "-webkit-transform": "rotate(90deg)",
-              "-moz-transform": "rotate(90deg)",
-              "-o-transform": "rotate(90deg)",
-              "-ms-transform": "rotate(90deg)",
-              transform: "rotate(90deg)"} : {
-              "-webkit-transform": "scaleX(-1)",
-              transform: "scaleX(-1)",
-            }}
+            style={
+              matchesSM
+                ? {
+                    "-webkit-transform": "rotate(90deg)",
+                    "-moz-transform": "rotate(90deg)",
+                    "-o-transform": "rotate(90deg)",
+                    "-ms-transform": "rotate(90deg)",
+                    transform: "rotate(90deg)",
+                  }
+                : {
+                    "-webkit-transform": "scaleX(-1)",
+                    transform: "scaleX(-1)",
+                  }
+            }
           >
             <Lottie
               options={arrowOptions}

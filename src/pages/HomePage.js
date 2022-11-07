@@ -16,6 +16,7 @@ import { ArrowRightAlt } from "@material-ui/icons";
 
 import infoBackground from "../assets/background.jpg";
 import customerSupport from "../assets/customersupport.png";
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
@@ -111,6 +112,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const HomePage = (props) => {
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   const classes = useStyles();
   const theme = useTheme();
   const { setActiveTab, setOption } = props;

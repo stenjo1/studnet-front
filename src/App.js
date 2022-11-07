@@ -9,6 +9,8 @@ import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import StudiesPage from "./pages/StudiesPage";
+import ExamsPage from "./pages/ExamsPage";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const [activeTab, setActiveTab] = useState(0);
@@ -16,6 +18,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header
@@ -45,7 +48,7 @@ function App() {
               <StudiesPage setActiveTab={setActiveTab} setOption={setOption} />
             )}
           ></Route>
-          <Route exact path="/exams" component={() => <div>Exams</div>}></Route>
+          <Route exact path="/exams" component={() => <ExamsPage />}></Route>
           <Route
             exact
             path="/subjects"
