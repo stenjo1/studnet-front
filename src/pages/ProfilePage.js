@@ -24,7 +24,6 @@ import {
 import EditIcon from "@material-ui/icons/Edit";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import SaveIcon from "@material-ui/icons/Save";
 
 import profileImage from "../assets/slika.jpg";
 import backgroundImage from "../assets/background.jpg";
@@ -40,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: "no-repeat",
     width: "100%",
     height: "100%",
+    [theme.breakpoints.down("xs")]: {
+      padding: 0,
+    },
   },
   avatar: {
     width: "15em",
@@ -55,13 +57,13 @@ const useStyles = makeStyles((theme) => ({
     width: "25em",
     marginBottom: "4em",
     [theme.breakpoints.down("md")]: {
-      justifyContent: "space-beetween",
+      justifyContent: "space-between",
       width: "20em",
       marginBottom: "2em",
     },
     [theme.breakpoints.down("xs")]: {
+      width: "100%",
       justifyContent: "flex-end",
-      width: "15em",
       marginBottom: "0em",
     },
   },
@@ -73,7 +75,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "1em",
     marginLeft: "1.5em",
     [theme.breakpoints.down("xs")]: {
-      width: "15em",
       marginLeft: "0.75em",
     },
   },
@@ -91,8 +92,16 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "1em",
     width: "20em",
     borderBottom: `0.5px solid ${theme.palette.common.grey}`,
+    [theme.breakpoints.down("ms")]: {
+      width: "100%",
+    },
     [theme.breakpoints.down("xs")]: {
-      width: "15em",
+      paddingBottom: "1em",
+      paddingTop: "1em",
+      borderBottom: `0.5px solid ${theme.palette.common.grey}`,
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
     },
   },
 }));
@@ -113,7 +122,7 @@ const ProfilePage = () => {
         justify="space-around"
         alignItems="center"
       >
-        <Grid item>
+        <Grid item style={{ width: matchesXS ? "100%" : "undefined" }}>
           <Paper elevation={5}>
             <Grid
               container
@@ -164,7 +173,8 @@ const ProfilePage = () => {
                   justify="center"
                   alignItems="flex-start"
                   style={{
-                    marginLeft: matchesMD ? "1em" : "6em",
+                    paddingLeft: matchesMD ? "1em" : "6em",
+                    paddingRight: matchesMD ? "1em" : "undefined",
                     marginTop: matchesMD ? "2em" : "undefined",
                   }}
                 >
@@ -359,17 +369,31 @@ const ProfilePage = () => {
                       </ExpansionPanelDetails>
                     </ExpansionPanel>
                   </Grid>
-                  <Grid item>
-                    <Button color="secondary" variant="contained">
-                      <SaveIcon />
-                    </Button>
+                  <Grid
+                    item
+                    style={{
+                      marginTop: "2em",
+                      width: "100%",
+                      marginBottom: "2em",
+                    }}
+                  >
+                    <Grid container justify="center" alignItems="center">
+                      <Button variant="contained">Cancel</Button>
+                      <Button
+                        color="secondary"
+                        variant="contained"
+                        style={{ marginLeft: "auto" }}
+                      >
+                        Save changes
+                      </Button>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
             </Grid>
           </Paper>
         </Grid>
-        <Grid item>
+        <Grid item style={{ width: matchesXS ? "100%" : "undefined" }}>
           <Paper>
             {!matchesXS && (
               <Grid
@@ -440,10 +464,11 @@ const ProfilePage = () => {
               <Grid
                 container
                 direction="column"
-                justify="flex-start"
-                alignItems="flex-start"
+                justify="center"
+                alignItems="center"
+                style={{ marginBottom: "2em" }}
               >
-                <ExpansionPanel>
+                <ExpansionPanel style={{ width: "100%" }}>
                   <ExpansionPanelSummary>
                     <Grid container className={classes.labelContainer}>
                       <SettingsIcon color="secondary" />

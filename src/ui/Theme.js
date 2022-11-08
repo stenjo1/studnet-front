@@ -15,6 +15,7 @@ export default createMuiTheme({
       black: black,
       grey: grey,
       green: green,
+      purple: purple,
       darkPurple: darkPurple,
     },
     primary: {
@@ -24,6 +25,7 @@ export default createMuiTheme({
       main: green,
       light: lightGreen,
     },
+
     background: {
       default: green,
     },
@@ -99,6 +101,26 @@ export default createMuiTheme({
       borderRadius: 50,
       fontFamily: "Roboto",
       fontWeight: "bold",
+    },
+    link: {
+      fontFamily: "Pacifico",
+      fontSize: "1.25em",
+      color: purple,
+      "&:hover": {
+        color: darkPurple,
+      },
+    },
+  },
+  overrides: {
+    MuiCheckbox: {
+      root: {
+        color: purple,
+      },
+      colorPrimary: {
+        "&$checked": {
+          color: purple,
+        },
+      },
     },
   },
 });
