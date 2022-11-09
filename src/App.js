@@ -11,6 +11,7 @@ import ProfilePage from "./pages/ProfilePage";
 import StudiesPage from "./pages/StudiesPage";
 import ExamsPage from "./pages/ExamsPage";
 import ScrollToTop from "./components/ScrollToTop";
+import SupportPage from "./pages/SupportPage";
 
 function App() {
   const [activeTab, setActiveTab] = useState(0);
@@ -62,7 +63,7 @@ function App() {
           <Route
             exact
             path="/support"
-            component={() => <div>Support</div>}
+            component={() => <SupportPage />}
           ></Route>
         </Switch>
         <Footer
