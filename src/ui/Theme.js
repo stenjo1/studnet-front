@@ -7,6 +7,7 @@ const green = "#77DD77";
 const lightGreen = "#a6e9a6";
 const purple = "#9A7FAE";
 const darkPurple = "#996699";
+const red = "#ff6961";
 
 export default createMuiTheme({
   palette: {
@@ -17,6 +18,7 @@ export default createMuiTheme({
       green: green,
       purple: purple,
       darkPurple: darkPurple,
+      red: red,
     },
     primary: {
       main: white,
@@ -76,7 +78,7 @@ export default createMuiTheme({
       fontSize: "1rem",
       fontFamily: "Roboto",
       fontWeight: 500,
-      color: "#ff6961",
+      color: red,
     },
     label: {
       fontSize: "1.25rem",

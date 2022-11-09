@@ -7,7 +7,15 @@ import {
   makeStyles,
   Paper,
   Switch,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  useMediaQuery,
   useTheme,
+  withStyles,
 } from "@material-ui/core";
 
 import {
@@ -22,8 +30,33 @@ import { useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 
 import exams from "../dummy-data/exams";
+import exams_history from "../dummy-data/exams_history";
+
+import Lottie from "react-lottie";
+import rightAnimationData from "../animations/pointinganimation/pointing_right.json";
+import downAnimationData from "../animations/pointinganimation/pointing_down.json";
+import background from "../assets/background_gradient.png";
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.purple,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
 
 const useStyles = makeStyles((theme) => ({
+  background: {
+    background: `linear-gradient(to bottom,${theme.palette.common.green} 0%, ${theme.palette.common.white} 50%, ${theme.palette.common.green} 100%) `,
+    marginTop: "-1em",
+    backgroundImage: `url(${background})`,
+    backgroundPosition: "center",
+    backgroundSize: "100% 100%",
+    backgroundRepeat: "no-repeat",
+  },
+  registerMainContainer: {},
   importantText: {
     ...theme.typography.important,
   },
@@ -65,42 +98,69 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.common.darkPurple,
     },
   },
+  "examsRow--5": {
+    backgroundColor: theme.palette.common.red,
+  },
 }));
 
-const columns = [
-  {
-    field: "semester",
-    headerName: "Semester",
-    width: 150,
-    headerClassName: "",
-  },
-  { field: "name", headerName: "Subject Name", width: 170 },
-  { field: "ects", headerName: "ECTS", width: 130 },
-  { field: "date", headerName: "Date", width: 130 },
-  { field: "time", headerName: "Time", width: 130 },
-  { field: "professor", headerName: "Professor", width: 170 },
-  { field: "colloquium", headerName: "Colloquium", width: 130 },
-];
-
 const DUMMY_SUBJECTS = exams;
+const DUMMY_EXAMS = exams_history;
 
 const ExamsPage = () => {
   const classes = useStyles();
   const theme = useTheme();
 
+  const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
+
   const [term, setTerm] = useState(0);
   const [checked, setChecked] = useState(true);
+
+  const columns = [
+    {
+      field: "semester",
+      headerName: "Semester",
+      width: matchesMD ? 100 : 150,
+      headerClassName: "",
+    },
+    { field: "name", headerName: "Subject Name", width: matchesMD ? 170 : 200 },
+    { field: "ects", headerName: "ECTS", width: matchesMD ? 90 : 130 },
+    { field: "date", headerName: "Date", width: matchesMD ? 100 : 130 },
+    { field: "time", headerName: "Time", width: matchesMD ? 100 : 130 },
+    { field: "professor", headerName: "Professor", width: 170 },
+    {
+      field: "colloquium",
+      headerName: "Colloquium",
+      width: matchesMD ? 90 : 130,
+    },
+  ];
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
+  const rightOptions = { ...defaultOptions, animationData: rightAnimationData };
+  const downOptions = { ...defaultOptions, animationData: downAnimationData };
 
   const toggleNotifications = () => {
     setChecked((prev) => !prev);
   };
 
   return (
-    <Grid container direction="column">
+    <Grid container direction="column" className={classes.background}>
       <Grid
         container
-        direction="row"
-        style={{ justifyContent: "space-evenly" }}
+        direction={matchesMD ? "column-reverse" : "row"}
+        justify={matchesMD ? "center" : "space-around"}
+        alignItems={matchesMD ? "center" : "flex-start"}
+        style={{
+          paddingTop: matchesMD ? "2em" : "4em",
+          paddingBottom: matchesMD ? "4em" : "4em",
+        }}
+        className={classes.registerMainContainer}
       >
         {/*register*/}
         <Grid
@@ -109,6 +169,7 @@ const ExamsPage = () => {
             backgroundColor: theme.palette.common.white,
             padding: "2em",
             textAlign: "center",
+            marginTop: matchesMD ? "4em" : "undefined",
           }}
         >
           <Grid container direction="column">
@@ -179,7 +240,10 @@ const ExamsPage = () => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item style={{ display: "flex", width: 1100 }}>
+            <Grid
+              item
+              style={{ display: "flex", width: matchesMD ? "500" : "1200" }}
+            >
               <DataGrid
                 rows={DUMMY_SUBJECTS}
                 columns={columns}
@@ -196,18 +260,29 @@ const ExamsPage = () => {
         </Grid>
         {/*  notificaitons*/}
         <Grid item>
-          <Grid container direction="column">
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={checked}
-                  onChange={toggleNotifications}
-                  classes={{ switchBase: classes.switchBase }}
-                ></Switch>
-              }
-              label="Notifications"
-              classes={{ label: classes.notificationsLabel }}
-            />
+          <Grid
+            container
+            direction="column"
+            style={{ marginTop: matchesMD ? "4em" : "undefined" }}
+          >
+            {!matchesMD && (
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={checked}
+                    onChange={toggleNotifications}
+                    classes={{ switchBase: classes.switchBase }}
+                  ></Switch>
+                }
+                label="Notifications"
+                classes={{ label: classes.notificationsLabel }}
+              />
+            )}
+            {matchesMD && (
+              <Typography variant="h4" style={{ textAlign: "center" }}>
+                Notifications
+              </Typography>
+            )}
             <Grid item>
               <Grow
                 in={checked}
@@ -305,7 +380,78 @@ const ExamsPage = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid container></Grid>
+      <Grid
+        container
+        direction="row"
+        justify="space-around"
+        alignItems="center"
+        style={{ marginTop: "10em", marginBottom: "8em" }}
+      >
+        <Grid item>
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            style={{ width: matchesMD ? "auto" : "40em", textAlign: "center" }}
+          >
+            <Grid item>
+              <Grid container direction="column">
+                <Typography variant="h4">
+                  Here you can see your exam history.
+                </Typography>
+                <Typography variant="subtitle1">
+                  Exams you did not pass are red colored.
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid item style={{ width: "50%" }}>
+              <Lottie
+                options={matchesMD ? downOptions : rightOptions}
+                height={"100%"}
+                width={"100%"}
+              ></Lottie>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item style={{ marginTop: matchesMD ? "8em" : "undefined" }}>
+          <Grow in>
+            <TableContainer component={Paper}>
+              <Table className={classes.table} aria-label="customized table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell>Subject</StyledTableCell>
+                    <StyledTableCell align="right">Score</StyledTableCell>
+                    <StyledTableCell align="right">Grade</StyledTableCell>
+                    <StyledTableCell align="right">Term</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {DUMMY_EXAMS.map((row) => (
+                    <TableRow
+                      key={row.name}
+                      classes={{ root: classes[`examsRow--${row.grade}`] }}
+                    >
+                      <StyledTableCell component="th" scope="row">
+                        {row.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {row.score}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {row.grade}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {row.term}
+                      </StyledTableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grow>
+        </Grid>
+      </Grid>
     </Grid>
   );
 };
