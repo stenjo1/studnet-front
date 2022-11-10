@@ -27,6 +27,7 @@ function App() {
           setActiveTab={setActiveTab}
           option={option}
           setOption={setOption}
+          isLogin={false}
         />
         <Switch>
           <Route
@@ -71,6 +72,7 @@ function App() {
           setActiveTab={setActiveTab}
           option={option}
           setOption={setOption}
+          isLogin={false}
         />
       </ThemeProvider>
     </BrowserRouter>

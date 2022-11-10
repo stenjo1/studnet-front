@@ -60,65 +60,67 @@ const Footer = (props) => {
   const theme = useTheme();
   console.log(theme);
 
-  const { setActiveTab } = props;
+  const { setActiveTab, isLogin } = props;
 
   return (
     <footer className={classes.footer}>
-      <Hidden mdDown>
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          className={classes.mainContainer}
-        >
-          <Grid item className={classes.gridItem}>
-            <Grid container direction="column" spacing={2}>
-              <Grid item>Design & Development</Grid>
-              <Grid
-                item
-                component={"a"}
-                href="https://github.com/stenjo1"
-                rel="noopener noreferrer"
-                target="_blank"
-                className={classes.link}
-              >
-                Stefanija Car
+      {!isLogin && (
+        <Hidden mdDown>
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            className={classes.mainContainer}
+          >
+            <Grid item className={classes.gridItem}>
+              <Grid container direction="column" spacing={2}>
+                <Grid item>Design & Development</Grid>
+                <Grid
+                  item
+                  component={"a"}
+                  href="https://github.com/stenjo1"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  className={classes.link}
+                >
+                  Stefanija Car
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item className={classes.gridItem}>
+              <Grid container direction="column" spacing={2}>
+                <Grid
+                  item
+                  component={Link}
+                  to="/"
+                  className={classes.link}
+                  onClick={() => setActiveTab(0)}
+                >
+                  Home
+                </Grid>
+                <Grid
+                  item
+                  component={Link}
+                  to="/profile"
+                  className={classes.link}
+                  onClick={() => setActiveTab(1)}
+                >
+                  Profile
+                </Grid>
+                <Grid
+                  item
+                  component={Link}
+                  to="/support"
+                  className={classes.link}
+                  onClick={() => setActiveTab(4)}
+                >
+                  Support
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-          <Grid item className={classes.gridItem}>
-            <Grid container direction="column" spacing={2}>
-              <Grid
-                item
-                component={Link}
-                to="/"
-                className={classes.link}
-                onClick={() => setActiveTab(0)}
-              >
-                Home
-              </Grid>
-              <Grid
-                item
-                component={Link}
-                to="/profile"
-                className={classes.link}
-                onClick={() => setActiveTab(1)}
-              >
-                Profile
-              </Grid>
-              <Grid
-                item
-                component={Link}
-                to="/support"
-                className={classes.link}
-                onClick={() => setActiveTab(4)}
-              >
-                Support
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Hidden>
+        </Hidden>
+      )}
       <img src={logo} alt="logo" className={classes.logo} />
 
       <Grid

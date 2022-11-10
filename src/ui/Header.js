@@ -147,7 +147,7 @@ const Header = (props) => {
   const [openMenu, setOpenMenu] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const { activeTab, setActiveTab, option, setOption } = props;
+  const { activeTab, setActiveTab, option, setOption, isLogin } = props;
 
   const changeHandler = (event, value) => {
     setActiveTab(value);
@@ -391,7 +391,7 @@ const Header = (props) => {
             >
               <img src={logo} alt="app logo" className={classes.logo} />
             </Button>
-            {matchesMD ? drawer : tabs}
+            {!isLogin ? matchesMD ? drawer : tabs : <></>}
           </Toolbar>
         </AppBar>
       </ElevationScroll>
